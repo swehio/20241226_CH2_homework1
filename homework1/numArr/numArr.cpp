@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 using namespace std;
 
 void drawLine() {
@@ -87,7 +88,13 @@ int main() {
 	{
 		cout << i + 1 << "번째 숫자를 입력해주세요. 입력(0부터 1000사이의 값): ";
 		cin >> nums[i];
-		if (!(nums[i] >= 0 && nums[i] <= 1000))
+		if (cin.fail()) {
+			cout << "숫자를 입력해주세요." << endl;
+			cin.clear(); // 실패 상태 플래그 초기화
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 남은 입력 버퍼 제거
+			i--;
+		}
+		else if (nums[i] < 0)
 		{
 			cout << "잘못 입력했습니다. 0부터 1000사이의 값을 입력해주세요." << endl;
 			i--;
